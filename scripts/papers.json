@@ -1,0 +1,60 @@
+{
+  "doi:10.1038/s42256-025-01154-z": {
+    "title": "Deciphering RNA-ligand Binding Specificity with GerNA-Bind",
+    "authors": "<strong>Yunpeng Xia</strong>, Jiayi Li, Yi-Ting Chu, Jiahua Rao, Jing Chen, Chenqing Hua, Dong-Jun Yu, Xiu-Cai Chen, Shuangjia Zheng",
+    "venue": "Nature Machine Intelligence, December 2025",
+    "tags": ["rna-design", "drug"],
+    "image": "images/GerNA-Bind.jpg",
+    "links": [
+      {"label": "Paper", "url": "https://www.nature.com/articles/s42256-025-01154-z", "class": "link-paper", "icon": "file-lines"},
+      {"label": "Code", "url": "https://github.com/GENTEL-lab/GerNA-Bind", "class": "link-code", "icon": "github"},
+      {"label": "Preprint", "url": "https://www.biorxiv.org/content/10.1101/2025.02.15.638393v1", "class": "link-code", "icon": "file"}
+    ]
+  },
+  "doi:10.1101/2025.02.15.638393": {
+    "_alias_for": "doi:10.1038/s42256-025-01154-z"
+  },
+  "doi:10.64898/2026.03.17.712398": {
+    "title": "A Long-Context Generative Foundation Model Deciphers RNA Design Principles",
+    "authors": "Yanjie Huang, Guangye Lv, Anyue Cheng, Wei Xie, Mengyan Chen, Xinyi Ma, Yijun Huang, Yueyang Tang, Qingya Shi, Jiahao Wang, Zining Wang, Junxiong Wang, <strong>Yunpeng Xia</strong>, Lulu Zhao, Yifan Cai, Jack X. Chen, Shuangjia Zheng",
+    "venue": "bioRxiv, March 2026",
+    "tags": ["rna-design"],
+    "image": "",
+    "links": [
+      {"label": "Paper", "url": "https://www.biorxiv.org/content/10.64898/2026.03.17.712398v1", "class": "link-paper", "icon": "file-lines"},
+      {"label": "Code", "url": "https://github.com/GENTEL-lab/EVA", "class": "link-code", "icon": "github"}
+    ]
+  },
+  "title:odesign: a world model for biomolecular interaction design": {
+    "title": "ODesign: A World Model for Biomolecular Interaction Design",
+    "authors": "Odin Zhang, Xujun Zhang, Haitao Lin, Cheng Tan, Qinghan Wang, Yuanle Mo, Qiantai Feng, Gang Du, Yuntao Yu, Zichang Jin, Ziyi You, Peicong Lin, Yijie Zhang, Yuyang Tao, Shicheng Chen, Jack Xiaoyu Chen, Chenqing Hua, Weibo Zhao, Runze Ma, <strong>Yunpeng Xia</strong>, Kejun Ying, Jun Li, Yundian Zeng, Lijun Lang, Peichen Pan, Hanqun Cao, Zihao Song, Bo Qiang, Jiaqi Wang, Pengfei Ji, Lei Bai, Jian Zhang, Chang-yu Hsieh, Pheng Ann Heng, Siqi Sun, Tingjun Hou, Shuangjia Zheng",
+    "venue": "arXiv:2510.22304, October 2025",
+    "tags": ["rna-design", "drug"],
+    "image": "images/ODesign.jpg",
+    "links": [
+      {"label": "Paper", "url": "https://arxiv.org/abs/2510.22304", "class": "link-paper", "icon": "file-lines"},
+      {"label": "Web Demo", "url": "https://odesign.lglab.ac.cn", "class": "link-web", "icon": "globe"}
+    ]
+  },
+  "doi:10.1109/TCBB.2024.3418490": {
+    "title": "BLAM6A-Merge: Leveraging Attention Mechanisms and Feature Fusion Strategies to Improve the Identification of RNA N6-Methyladenosine Sites",
+    "authors": "<strong>Yunpeng Xia</strong>, Ying Zhang, Dian Liu, Yi-Heng Zhu, Zhikang Wang, Jiangning Song, Dong-Jun Yu",
+    "venue": "IEEE/ACM Transactions on Computational Biology and Bioinformatics, 2024",
+    "tags": ["rna-mod"],
+    "image": "images/BLAM6A-Merge.jpg",
+    "links": [
+      {"label": "Paper", "url": "https://ieeexplore.ieee.org/document/10570286", "class": "link-paper", "icon": "file-lines"},
+      {"label": "Code", "url": "https://github.com/DoraemonXia/BLAM6A-Merge", "class": "link-code", "icon": "github"}
+    ]
+  },
+  "doi:10.1109/TCBB.2024.3386972": {
+    "title": "TransC-ac4C: Identification of N4-Acetylcytidine (ac4C) Sites in mRNA Using Deep Learning",
+    "authors": "Dian Liu, Zi Liu, <strong>Yunpeng Xia</strong>, Zhikang Wang, Jiangning Song, Dong-Jun Yu",
+    "venue": "IEEE/ACM Transactions on Computational Biology and Bioinformatics, 2024",
+    "tags": ["rna-mod"],
+    "image": "images/TransC-ac4C.jpg",
+    "links": [
+      {"label": "Paper", "url": "https://ieeexplore.ieee.org/document/10497858", "class": "link-paper", "icon": "file-lines"}
+    ]
+  }
+}
