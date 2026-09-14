@@ -9,11 +9,13 @@ API docs: https://api.semanticscholar.org/api-docs/graph
 import json
 import os
 import re
+import random
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from urllib.request import Request, urlopen
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 
 AUTHOR_ID = "2296580567"
 API_URL = f"https://api.semanticscholar.org/graph/v1/author/{AUTHOR_ID}/papers"
@@ -25,20 +27,55 @@ START_MARKER = "<!-- PAPERS_START -->"
 END_MARKER = "<!-- PAPERS_END -->"
 
 
-def fetch_papers():
-    """Fetch papers from Semantic Scholar API with retry."""
-    url = f"{API_URL}?fields={FIELDS}&limit=100"
-    for attempt in range(3):
+def retry_delay(attempt, retry_after=None):
+    """Use exponential backoff and respect the server's Retry-After header."""
+    delay = min(30 * 2 ** attempt, 300) + random.uniform(0, 5)
+    if retry_after:
         try:
-            req = Request(url, headers={"User-Agent": "AcademicWebsite/1.0"})
+            server_delay = float(retry_after)
+        except ValueError:
+            try:
+                server_delay = (
+                    parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)
+                ).total_seconds()
+            except (TypeError, ValueError, OverflowError):
+                server_delay = 0
+        delay = max(delay, server_delay)
+    return delay
+
+
+def fetch_papers():
+    """Retry transient API failures without modifying the site on failure."""
+    url = f"{API_URL}?fields={FIELDS}&limit=100"
+    headers = {"User-Agent": "AcademicWebsite/1.0"}
+    api_key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY")
+    if api_key:
+        headers["x-api-key"] = api_key
+    attempts = 6
+    for attempt in range(attempts):
+        retry_after = None
+        try:
+            req = Request(url, headers=headers)
             with urlopen(req, timeout=30) as resp:
                 data = json.loads(resp.read().decode())
-                return data.get("data", [])
-        except Exception as e:
-            print(f"Attempt {attempt + 1} failed: {e}")
-            if attempt < 2:
-                time.sleep(5)
-    print("Failed to fetch papers after 3 attempts.")
+                if not isinstance(data, dict) or not isinstance(data.get("data"), list):
+                    raise ValueError("API response is missing the papers list")
+                return data["data"]
+        except HTTPError as e:
+            print(f"Attempt {attempt + 1} failed: HTTP {e.code}", flush=True)
+            if e.code not in (408, 429, 500, 502, 503, 504):
+                break
+            retry_after = e.headers.get("Retry-After") if e.headers else None
+        except (URLError, TimeoutError, ConnectionError) as e:
+            print(f"Attempt {attempt + 1} failed: {e}", flush=True)
+        except ValueError as e:
+            print(f"Invalid API response: {e}", flush=True)
+            break
+        if attempt < attempts - 1:
+            delay = retry_delay(attempt, retry_after)
+            print(f"Retrying in {delay:.1f} seconds...", flush=True)
+            time.sleep(delay)
+    print("Failed to fetch papers; existing publications will be preserved.")
     return None
 
 

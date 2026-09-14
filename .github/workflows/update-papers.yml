@@ -9,6 +9,7 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
 
@@ -21,7 +22,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Test update script
+        run: python -m unittest discover -s scripts -p "test_*.py"
+
       - name: Run update script
+        env:
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
         run: python scripts/update_papers.py
 
       - name: Commit and push if changed
