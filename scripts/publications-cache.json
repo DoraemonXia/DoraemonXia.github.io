@@ -1,0 +1,378 @@
+{
+  "orcid": "0009-0000-7567-6978",
+  "papers": [
+    {
+      "title": "DrugDL: dual-modal deep learning framework for multi-property drug prediction and targeted therapy discovery",
+      "externalIds": {
+        "DOI": "10.1093/bioinformatics/btag392"
+      },
+      "year": 2026,
+      "publicationDate": "2026-07-02",
+      "venue": "Bioinformatics",
+      "url": "https://doi.org/10.1093/bioinformatics/btag392",
+      "authors": [
+        {
+          "name": "Qi Zhang"
+        },
+        {
+          "name": "Xuan Yu"
+        },
+        {
+          "name": "Yuxiao Wei"
+        },
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Long-Chen Shen"
+        },
+        {
+          "name": "Zhi-Hui Wang"
+        },
+        {
+          "name": "Hong-Bin Shen"
+        },
+        {
+          "name": "Dong-Jun Yu"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978",
+      "citationCount": 1
+    },
+    {
+      "title": "A Long-Context Generative Foundation Model Deciphers RNA Design Principles",
+      "externalIds": {
+        "DOI": "10.64898/2026.03.17.712398"
+      },
+      "year": 2026,
+      "publicationDate": "2026-03-18",
+      "venue": "",
+      "url": "https://doi.org/10.64898/2026.03.17.712398",
+      "authors": [
+        {
+          "name": "Yanjie Huang"
+        },
+        {
+          "name": "Guangye Lv"
+        },
+        {
+          "name": "Anyue Cheng"
+        },
+        {
+          "name": "Wei Xie"
+        },
+        {
+          "name": "Mengyan Chen"
+        },
+        {
+          "name": "Xinyi Ma"
+        },
+        {
+          "name": "Yijun Huang"
+        },
+        {
+          "name": "Yueyang Tang"
+        },
+        {
+          "name": "Qingya Shi"
+        },
+        {
+          "name": "Zining Wang"
+        },
+        {
+          "name": "Junxi Wang"
+        },
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Lu Zhao"
+        },
+        {
+          "name": "Yifang Cai"
+        },
+        {
+          "name": "Jack X. Chen"
+        },
+        {
+          "name": "Shuangjia Zheng"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978",
+      "citationCount": 2
+    },
+    {
+      "title": "Deciphering RNA–ligand binding specificity with GerNA-Bind",
+      "externalIds": {
+        "DOI": "10.1038/s42256-025-01154-z"
+      },
+      "year": 2025,
+      "publicationDate": "2025-12-12",
+      "venue": "Nature Machine Intelligence",
+      "url": "https://doi.org/10.1038/s42256-025-01154-z",
+      "authors": [
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Jiayi Li"
+        },
+        {
+          "name": "Yi-Ting Chu"
+        },
+        {
+          "name": "Jiahua Rao"
+        },
+        {
+          "name": "Jing Chen"
+        },
+        {
+          "name": "Chenqing Hua"
+        },
+        {
+          "name": "Dong-Jun Yu"
+        },
+        {
+          "name": "Xiu-Cai Chen"
+        },
+        {
+          "name": "Shuangjia Zheng"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978",
+      "citationCount": 7
+    },
+    {
+      "title": "GerNA-Bind: Geometric-enhanced RNA-ligand Binding Specificity Prediction with Deep Learning",
+      "externalIds": {
+        "DOI": "10.1101/2025.02.15.638393"
+      },
+      "year": 2025,
+      "publicationDate": "2025-02-19",
+      "venue": "",
+      "url": "https://doi.org/10.1101/2025.02.15.638393",
+      "authors": [
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Jiayi Li"
+        },
+        {
+          "name": "Yi-Ting Chu"
+        },
+        {
+          "name": "Jiahua Rao"
+        },
+        {
+          "name": "Jing Chen"
+        },
+        {
+          "name": "Chenqing Hua"
+        },
+        {
+          "name": "Dong-Jun Yu"
+        },
+        {
+          "name": "Xiu-Cai Chen"
+        },
+        {
+          "name": "Shuangjia Zheng"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978",
+      "citationCount": 1
+    },
+    {
+      "title": "ODesign: A World Model for Biomolecular Interaction Design",
+      "externalIds": {
+        "DOI": "10.48550/ARXIV.2510.22304"
+      },
+      "year": 2025,
+      "publicationDate": "2025",
+      "venue": "",
+      "url": "https://doi.org/10.48550/ARXIV.2510.22304",
+      "authors": [
+        {
+          "name": "Odin Zhang"
+        },
+        {
+          "name": "Xujun Zhang"
+        },
+        {
+          "name": "Haitao Lin"
+        },
+        {
+          "name": "Cheng Tan"
+        },
+        {
+          "name": "Qinghan Wang"
+        },
+        {
+          "name": "Yuanle Mo"
+        },
+        {
+          "name": "Qiantai Feng"
+        },
+        {
+          "name": "Gang Du"
+        },
+        {
+          "name": "Yuntao Yu"
+        },
+        {
+          "name": "Zichang Jin"
+        },
+        {
+          "name": "Ziyi You"
+        },
+        {
+          "name": "Peicong Lin"
+        },
+        {
+          "name": "Yijie Zhang"
+        },
+        {
+          "name": "Yuyang Tao"
+        },
+        {
+          "name": "Shicheng Chen"
+        },
+        {
+          "name": "Jack Xiaoyu Chen"
+        },
+        {
+          "name": "Chenqing Hua"
+        },
+        {
+          "name": "Weibo Zhao"
+        },
+        {
+          "name": "Runze Ma"
+        },
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Kejun Ying"
+        },
+        {
+          "name": "Jun Li"
+        },
+        {
+          "name": "Yundian Zeng"
+        },
+        {
+          "name": "Lijun Lang"
+        },
+        {
+          "name": "Peichen Pan"
+        },
+        {
+          "name": "Hanqun Cao"
+        },
+        {
+          "name": "Zihao Song"
+        },
+        {
+          "name": "Bo Qiang"
+        },
+        {
+          "name": "Jiaqi Wang"
+        },
+        {
+          "name": "Pengfei Ji"
+        },
+        {
+          "name": "Lei Bai"
+        },
+        {
+          "name": "Jian Zhang"
+        },
+        {
+          "name": "Chang-yu Hsieh"
+        },
+        {
+          "name": "Pheng Ann Heng"
+        },
+        {
+          "name": "Siqi Sun"
+        },
+        {
+          "name": "Tingjun Hou"
+        },
+        {
+          "name": "Shuangjia Zheng"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978"
+    },
+    {
+      "title": "BLAM6A-Merge: Leveraging Attention Mechanisms and Feature Fusion Strategies to Improve the Identification of RNA N6-Methyladenosine Sites",
+      "externalIds": {
+        "DOI": "10.1109/TCBB.2024.3418490"
+      },
+      "year": 2024,
+      "publicationDate": "2024-11",
+      "venue": "IEEE/ACM Transactions on Computational Biology and Bioinformatics",
+      "url": "https://doi.org/10.1109/TCBB.2024.3418490",
+      "authors": [
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Ying Zhang"
+        },
+        {
+          "name": "Dian Liu"
+        },
+        {
+          "name": "Yi-Heng Zhu"
+        },
+        {
+          "name": "Zhikang Wang"
+        },
+        {
+          "name": "Jiangning Song"
+        },
+        {
+          "name": "Dong-Jun Yu"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978",
+      "citationCount": 3
+    },
+    {
+      "title": "TransC-ac4C: Identification of N4-Acetylcytidine (ac4C) Sites in mRNA Using Deep Learning",
+      "externalIds": {
+        "DOI": "10.1109/TCBB.2024.3386972"
+      },
+      "year": 2024,
+      "publicationDate": "2024-09",
+      "venue": "IEEE/ACM Transactions on Computational Biology and Bioinformatics",
+      "url": "https://doi.org/10.1109/TCBB.2024.3386972",
+      "authors": [
+        {
+          "name": "Dian Liu"
+        },
+        {
+          "name": "Zi Liu"
+        },
+        {
+          "name": "Yunpeng Xia"
+        },
+        {
+          "name": "Zhikang Wang"
+        },
+        {
+          "name": "Jiangning Song"
+        },
+        {
+          "name": "Dong-Jun Yu"
+        }
+      ],
+      "_orcid": "0009-0000-7567-6978",
+      "citationCount": 3
+    }
+  ]
+}
