@@ -12,6 +12,7 @@ import re
 import random
 import sys
 import time
+import unicodedata
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from urllib.request import Request, urlopen
@@ -87,20 +88,106 @@ def load_known_papers():
     return {}
 
 
+def normalize_title(title):
+    return "".join(c for c in unicodedata.normalize("NFKC", title).casefold() if c.isalnum())
+
+
 def get_paper_key(paper):
-    """Derive a stable key from Semantic Scholar paper data."""
-    title = paper.get("title", "").strip().lower()
-    # Use DOI or first 50 chars of title as key
-    ext = paper.get("externalIds", {}) or {}
-    doi = ext.get("DOI", "")
+    """Use the complete title when a DOI is unavailable."""
+    doi = (paper.get("externalIds") or {}).get("DOI")
     if doi:
-        return f"doi:{doi}"
-    return f"title:{title[:60]}"
+        return f"doi:{doi.strip().lower()}"
+    return f"title:{normalize_title(paper.get('title') or '')}"
+
+
+def normalize_key(key):
+    kind, value = key.split(":", 1)
+    return f"{kind}:{normalize_title(value) if kind == 'title' else value.strip().lower()}"
+
+
+def paper_identities(paper):
+    ids = set()
+    title = normalize_title(paper.get("title") or "")
+    if title:
+        ids.add(f"title:{title}")
+    for kind, value in (paper.get("externalIds") or {}).items():
+        if value and kind in ("DOI", "ArXiv"):
+            ids.add(f"{kind.lower()}:{str(value).strip().lower()}")
+    if paper.get("paperId"):
+        ids.add(f"s2:{paper['paperId']}")
+    return ids
+
+
+def prepare_papers(papers, known):
+    """Merge versions by identifiers/title and retain curated publications."""
+    normalized = {normalize_key(key): key for key in known}
+
+    def canonical(key):
+        seen = set()
+        while "_alias_for" in known[key]:
+            if key in seen:
+                raise ValueError(f"Cyclic paper alias: {key}")
+            seen.add(key)
+            key = normalized[normalize_key(known[key]["_alias_for"])]
+        return key
+
+    identity_map = {}
+    for key, info in known.items():
+        target = canonical(key)
+        for identity in {normalize_key(key)} | paper_identities(info):
+            identity_map[identity] = target
+
+    candidates = []
+    for paper in papers:
+        paper = dict(paper)
+        identities = paper_identities(paper)
+        key = identity_map.get(get_paper_key(paper))
+        if key is None:
+            key = next((identity_map[i] for i in sorted(identities) if i in identity_map), None)
+        if key is not None:
+            paper["_known_key"] = key
+            identities.add(f"known:{key}")
+        candidates.append((paper, identities))
+
+    for key, info in known.items():
+        if "_alias_for" not in info:
+            paper = {**info, "_known_key": key, "_curated_only": True}
+            candidates.append((paper, paper_identities(info) | {f"known:{key}"}))
+
+    groups = []
+    for paper, identities in candidates:
+        members = [paper]
+        remaining = []
+        for group_ids, group_members in groups:
+            if identities & group_ids:
+                identities |= group_ids
+                members.extend(group_members)
+            else:
+                remaining.append((group_ids, group_members))
+        groups = remaining + [(identities, members)]
+
+    result = []
+    for _, members in groups:
+        def preference(paper):
+            key = paper.get("_known_key")
+            return (
+                not paper.get("_curated_only", False),
+                key is not None and get_paper_key(paper) == normalize_key(key),
+                paper.get("citationCount") or 0,
+                paper.get("paperId") or "",
+            )
+        selected = dict(max(members, key=preference))
+        key = next((p["_known_key"] for p in members if "_known_key" in p), None)
+        if key is not None:
+            selected["_known_key"] = key
+            selected["year"] = known[key].get("year") or selected.get("year")
+        result.append(selected)
+    return sorted(result, key=lambda p: (-(p.get("year") or 0), normalize_title(p.get("title") or "")))
 
 
 def generate_paper_html(paper, known):
     """Generate HTML block for a single paper using known config if available."""
-    key = get_paper_key(paper)
+    key = paper.get("_known_key", get_paper_key(paper))
     info = known.get(key, {})
 
     # Follow alias chain (for preprint → published mappings)
@@ -183,7 +270,6 @@ def generate_paper_html(paper, known):
         {authors_html}
       </div>
       <div class="paper-venue">
-        <span class="venue-tag">Updated via Semantic Scholar</span>
         {venue_text}{cite_str}
       </div>
       <div class="paper-links">{links_html}
@@ -230,30 +316,12 @@ def main():
     print(f"Found {len(papers)} papers from Semantic Scholar.")
     known = load_known_papers()
 
-    # Sort by year descending
-    papers.sort(key=lambda p: p.get("year", 0) or 0, reverse=True)
+    papers = prepare_papers(papers, known)
+    print(f"Displaying {len(papers)} unique publications after merging curated records.")
+    html_blocks = [generate_paper_html(paper, known) for paper in papers]
+    new_papers = [paper.get("title", "Untitled") for paper in papers if "_known_key" not in paper]
 
-    # Generate HTML; skip aliased duplicates
-    html_blocks = []
-    new_papers = []
-    seen_keys = set()
-    for paper in papers:
-        key = get_paper_key(paper)
-        info = known.get(key, {})
-        # Skip preprint if it's an alias for a published version
-        if "_alias_for" in info:
-            alias_target = info["_alias_for"]
-            if alias_target in seen_keys:
-                continue
-            seen_keys.add(key)
-            html_blocks.append(generate_paper_html(paper, known))
-            continue
-        if key not in known:
-            new_papers.append(paper.get("title", "Untitled"))
-        seen_keys.add(key)
-        html_blocks.append(generate_paper_html(paper, known))
-
-    papers_html = "\n\n".join(html_blocks)
+    papers_html = "\n".join(line.rstrip() for line in "\n\n".join(html_blocks).splitlines())
 
     if new_papers:
         print(f"\n--- NEW PAPERS DETECTED ({len(new_papers)}) ---")
